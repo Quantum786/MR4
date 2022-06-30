@@ -27,7 +27,7 @@ BASE_URL = ""
 
 def argparser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-a", "--account", nargs="*")
+    parser.add_argument("-a", "--accounts", nargs="*")
     parser.add_argument("-h", "--headless", action="store_true")
     return parser.parse_args()
 
@@ -756,9 +756,9 @@ prPurple("        by Charles Bel (@charlesbel)               version 2.0\n")
 
 LANG, GEO, TZ = getCCodeLangAndOffset()
 
-if argparser().account:
+if argparser().accounts:
     ACCOUNTS = []
-    for arg in argparser().account:
+    for arg in argparser().accounts:
         ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
 else:
     try:
