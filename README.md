@@ -48,4 +48,4 @@ python MicrosoftRewardsBot -h -a user:pass user2:pass2
 * Workflow script
 
 ## Credits
-Credits to the original author of the repo : [charlesbel](https://github.com/charlesbel)
+Credits to the original author of the repo [charlesbel](https://github.com/charlesbel)
