@@ -26,21 +26,24 @@ POINTS_COUNTER = 0
 BASE_URL = ""
 
 # Command-line options
-def argparser():
+def arg_parse():
     parser = argparse.ArgumentParser()
     parser.add_argument("-a", "--accounts", nargs="*")
     parser.add_argument("-hl", "--headless", action="store_true")
+    parser.add_argument("-p", "--proxy")
     return parser.parse_args()
 
 # Define browser setup function
-def browserSetup(headless_mode: bool = False, user_agent: str = PC_USER_AGENT) -> WebDriver:
+def browserSetup(user_agent: str = PC_USER_AGENT) -> WebDriver:
     # Create Chrome browser
     from selenium.webdriver.chrome.options import Options
     options = Options()
     options.add_argument("user-agent=" + user_agent)
     options.add_argument('lang=' + LANG.split("-")[0])
-    if headless_mode :
+    if arg_parse().headless:
         options.add_argument("--headless")
+    if arg_parse().proxy:
+        options.add_argument('--proxy-server=' + arg_parse().proxy)
     options.add_argument('log-level=3')
     chrome_browser_obj = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
     return chrome_browser_obj
@@ -773,7 +776,7 @@ random.shuffle(ACCOUNTS)
 
 for account in ACCOUNTS:
     prYellow('********************' + account['username'] + '********************')
-    browser = browserSetup(argparser().headless, PC_USER_AGENT)
+    browser = browserSetup(PC_USER_AGENT)
     print('[LOGIN]', 'Logging-in...')
     login(browser, account['username'], account['password'])
     prGreen('[LOGIN] Logged-in successfully !')
@@ -812,7 +815,7 @@ for account in ACCOUNTS:
     browser.quit()
 
     if remainingSearchesM != 0:
-        browser = browserSetup(argparser().headless, MOBILE_USER_AGENT)
+        browser = browserSetup(MOBILE_USER_AGENT)
         print('[LOGIN]', 'Logging-in...')
         login(browser, account['username'], account['password'], True)
         print('[LOGIN]', 'Logged-in successfully !')
