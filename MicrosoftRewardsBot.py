@@ -44,7 +44,7 @@ def browserSetup(user_agent: str = PC_USER_AGENT) -> WebDriver:
     if arg_parse().headless:
         options.add_argument("--headless")
     if arg_parse().extension:
-	options.add_extension('extension.crx')
+        options.add_extension('extension.crx')
     if arg_parse().proxy:
         options.add_argument('--proxy-server=' + arg_parse().proxy)
     options.add_argument('log-level=3')
