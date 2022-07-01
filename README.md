@@ -46,6 +46,7 @@ python MicrosoftRewardsBot -h -a user:pass user2:pass2
 * Multi-Account Management
 * Command-line options
 * Workflow script
+* Proxy/VPN support
 
 ## Credits
 Credits to the original author of the repo [charlesbel](https://github.com/charlesbel)
