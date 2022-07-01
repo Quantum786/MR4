@@ -753,7 +753,7 @@ LANG, GEO, TZ = getCCodeLangAndOffset()
 
 if argparser().accounts:
     ACCOUNTS = []
-    for arg in argparser().accounts:
+    for arg in arg_parse().accounts:
         ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
 else:
     try:
