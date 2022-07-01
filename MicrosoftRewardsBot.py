@@ -30,6 +30,7 @@ def arg_parse():
     parser = argparse.ArgumentParser()
     parser.add_argument("-a", "--accounts", nargs="*")
     parser.add_argument("-hl", "--headless", action="store_true")
+    parser.add_argument("-e", "--extension", action="store_true")
     parser.add_argument("-p", "--proxy")
     return parser.parse_args()
 
@@ -42,6 +43,8 @@ def browserSetup(user_agent: str = PC_USER_AGENT) -> WebDriver:
     options.add_argument('lang=' + LANG.split("-")[0])
     if arg_parse().headless:
         options.add_argument("--headless")
+    if arg_parse().extension:
+	options.add_extension('extension.crx')
     if arg_parse().proxy:
         options.add_argument('--proxy-server=' + arg_parse().proxy)
     options.add_argument('log-level=3')
@@ -778,6 +781,7 @@ for account in ACCOUNTS:
     prYellow('********************' + account['username'] + '********************')
     browser = browserSetup(PC_USER_AGENT)
     print('[LOGIN]', 'Logging-in...')
+    time.sleep(5)
     login(browser, account['username'], account['password'])
     prGreen('[LOGIN] Logged-in successfully !')
     startingPoints = POINTS_COUNTER
