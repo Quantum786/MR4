@@ -25,6 +25,7 @@ POINTS_COUNTER = 0
 
 BASE_URL = ""
 
+# Command-line options
 def argparser():
     parser = argparse.ArgumentParser()
     parser.add_argument("-a", "--accounts", nargs="*")
@@ -745,15 +746,6 @@ def prPurple(prt):
 def prYellow(prt):
     print("\033[93m{}\033[00m".format(prt))
 
-prRed("""
-███╗   ███╗███████╗    ███████╗ █████╗ ██████╗ ███╗   ███╗███████╗██████╗ 
-████╗ ████║██╔════╝    ██╔════╝██╔══██╗██╔══██╗████╗ ████║██╔════╝██╔══██╗
-██╔████╔██║███████╗    █████╗  ███████║██████╔╝██╔████╔██║█████╗  ██████╔╝
-██║╚██╔╝██║╚════██║    ██╔══╝  ██╔══██║██╔══██╗██║╚██╔╝██║██╔══╝  ██╔══██╗
-██║ ╚═╝ ██║███████║    ██║     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗██║  ██║
-╚═╝     ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝""")
-prPurple("        by Charles Bel (@charlesbel)               version 2.0\n")
-
 LANG, GEO, TZ = getCCodeLangAndOffset()
 
 if argparser().accounts:
@@ -780,7 +772,6 @@ else:
 random.shuffle(ACCOUNTS)
 
 for account in ACCOUNTS:
-
     prYellow('********************' + account['username'] + '********************')
     browser = browserSetup(argparser().headless, PC_USER_AGENT)
     print('[LOGIN]', 'Logging-in...')
