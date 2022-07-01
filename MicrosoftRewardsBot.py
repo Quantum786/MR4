@@ -751,7 +751,7 @@ def prYellow(prt):
 
 LANG, GEO, TZ = getCCodeLangAndOffset()
 
-if argparser().accounts:
+if arg_parse().accounts:
     ACCOUNTS = []
     for arg in arg_parse().accounts:
         ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
