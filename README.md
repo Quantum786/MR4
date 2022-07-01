@@ -38,9 +38,16 @@ If you want to add more than one account, the syntax is the following :
 * Complete automatically the others promotions
 * Headless Mode
 * Multi-Account Management
-* Command-line options
-* Workflow script
-* Proxy/VPN support
+* Modified to be undetectable as bot
+* If it faces to an unexpected error then try the account from first
+* Save progress of bot in a log file and use it to pass completed account on the next start at the same day
+* Detect suspended accounts
+* Detect locked accounts
+* Detect unusual activites
+* Uses time out to prevent infinite loop
+* You can assign custom user-agent for mobile like above example
+* Set clock to start it at specific time
+* For Bing search it uses random word at first try and if api failed then it uses google trends
 
 ## Credits
 Credits to the original author of the repo [charlesbel](https://github.com/charlesbel)
