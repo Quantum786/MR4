@@ -13,6 +13,10 @@ An automated solution for earning daily Microsoft Rewards points using Python an
  pip install -r requirements.txt
  ```
 * Make sure you have Chrome installed.
+* Run the script
+
+### Using Github Actions
+* Fork the repo
 * Edit the accounts.json.sample with your accounts credentials and rename it by removing .sample at the end
 If you want to add more than one account, the syntax is the following :
 ```json
@@ -25,16 +29,6 @@ If you want to add more than one account, the syntax is the following :
   "password": "Your Password"
 }
 ```
-* Run the script
-### Using command-line
-* Run the the script with the following arguments :
- ```
-python MicrosoftRewardsBot -h -a user:pass user2:pass2
- ```
- Where `-h` is for headless-mode and `user:pass` is for `Your Email:Your Password`.
-### Using Github Actions
-* Fork the repo
-* Add `ACCOUNTS` secret, [More info](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
 * Run `Deploy` workflow
  
 ## Features
