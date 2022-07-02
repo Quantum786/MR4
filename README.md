@@ -59,4 +59,5 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * For Bing search it uses random word at first try and if api failed then it uses google trends
 
 ## Credits
-Credits to the original author of the repo [charlesbel](https://github.com/charlesbel)
+* [@charlesbel](https://github.com/charlesbel) The original author of the repo.
+* [@Farshadz1997](https://github.com/farshadz1997) For adding a bunch of features.
