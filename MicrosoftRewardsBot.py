@@ -1099,6 +1099,7 @@ else:
         input()
         ACCOUNTS = json.load(open(account_path, "r"))
 
+
 def App():
     '''
     fuction that runs other functions to farm.
@@ -1199,7 +1200,28 @@ def main():
     # show colors in terminal
     if os.name == 'nt':
         os.system('color')
-    Menu()
+    # load accounts
+    if ARGS.accounts:
+        ACCOUNTS = []
+        for arg in ARGS.accounts:
+            ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
+    else:
+        try:
+            account_path = os.path.dirname(os.path.abspath(__file__)) + '/accounts.json'
+            filename, ext = os.path.splitext(os.path.basename(account_path))
+            ACCOUNTS = json.load(open(account_path, "r"))
+        except FileNotFoundError:
+            with open(account_path, 'w') as f:
+                f.write(json.dumps([{
+                    "username": "Your Email",
+                    "password": "Your Password"
+                }], indent=4))
+            prPurple(f"""
+        [ACCOUNT] Accounts credential file "{filename}{ext}" created.
+        [ACCOUNT] Edit with your credentials and save, then press any key to continue...
+            """)
+            input()
+            ACCOUNTS = json.load(open(account_path, "r"))
     # Get the arguments from the command line
     ARGS = argument_parser()
     LANG, GEO, TZ = getCCodeLangAndOffset()
