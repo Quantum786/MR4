@@ -2,8 +2,9 @@ certifi
 chardet
 idna
 requests
-selenium
+selenium==3.141.0
 urllib3
 ipapi
-webdriver_manager
-argparse
+func_timeout
+random-word==1.0.7
+pyyaml
