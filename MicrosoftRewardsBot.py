@@ -1002,7 +1002,7 @@ def Logs():
     shared_items =[]
     try:
         # Read datas on 'logs_accounts.txt'
-        LOGS = json.load(open(f"logs_{filename}.txt", "r"))
+        LOGS = json.load(open(f"logs.txt", "r"))
         # sync accounts and logs file for new accounts or remove accounts from logs.
         for user in ACCOUNTS:
             shared_items.append(user['username'])
@@ -1032,7 +1032,7 @@ def Logs():
         UpdateLogs()               
         prGreen('\n[LOGS] Logs loaded successfully.\n')
     except FileNotFoundError:
-        prRed(f'\n[LOGS] "Logs_{filename}.txt" file not found.')
+        prRed(f'\n[LOGS] "logs.txt" file not found.')
         LOGS = {}
         for account in ACCOUNTS:
             LOGS[account["username"]] = {"Last check": "",
@@ -1043,11 +1043,11 @@ def Logs():
                                         "More promotions": False,
                                         "PC searches": False}
         UpdateLogs()
-        prGreen(f'[LOGS] "Logs_{filename}.txt" created.\n')
+        prGreen(f'[LOGS] "logs.txt" created.\n')
         
 def UpdateLogs():
     global LOGS
-    with open(f'Logs_{filename}.txt', 'w') as file:
+    with open(f'logs.txt', 'w') as file:
         file.write(json.dumps(LOGS, indent = 4))
 
 def CleanLogs():
@@ -1078,28 +1078,26 @@ def Menu():
     prPurple("by @Charlesbel | upgraded by @MehdiRtal and @Farshadz1997 | version 2.1\n")
 
 def LoadAccounts():
-    global ACCOUNTS, filename
+    global ACCOUNTS
     if ARGS.accounts:
         ACCOUNTS = []
         for arg in ARGS.accounts:
             ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
     else:
         try:
-            account_path = os.path.dirname(os.path.abspath(__file__)) + '/accounts.json'
-            filename, ext = os.path.splitext(os.path.basename(account_path))
-            ACCOUNTS = json.load(open(account_path, "r"))
+            ACCOUNTS = json.load(open("accounts.json", "r"))
         except FileNotFoundError:
-            with open(account_path, 'w') as f:
+            with open("accounts.json", 'w') as f:
                 f.write(json.dumps([{
                     "username": "Your Email",
                     "password": "Your Password"
                 }], indent=4))
             prPurple(f"""
-        [ACCOUNT] Accounts credential file "{filename}{ext}" created.
+        [ACCOUNT] Accounts credential file "accounts.json" created.
         [ACCOUNT] Edit with your credentials and save, then press any key to continue...
             """)
             input()
-            ACCOUNTS = json.load(open(account_path, "r"))
+            ACCOUNTS = json.load(open("accounts.json", "r"))
 
 def App():
     '''
