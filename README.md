@@ -14,8 +14,12 @@ An automated solution for earning daily Microsoft Rewards points using Python an
  ```
 * Make sure you have Chrome installed.
 * Due to limits of Ipapi sometimes it returns error and it causes bot stops. So you can define default language and location to prevent it.
-* Run the script
-	* Use optinal arguments:
+* Run the script.
+	* Optional arguments:
+		*  `--headless ` You can use this argument to run the script in headless mode.
+		*  `--session ` Use this argument to create session for each account.
+		*  `-everyday TIME` This argument takes time in 24h format (HH:MM) to run it everyday at the given time by leaving the program open.
+	* Run the script normally that session and headless disabled and it asks you to input a time if you want to run it at a specific time.
 
 ### Using Github Actions
 * Fork the repo.
