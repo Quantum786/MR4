@@ -43,7 +43,7 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * Complete automatically punch cards.
 * Complete automatically the others promotions.
 * Headless Mode.
-* Multi-Account Management.
+* Multi-Account Management (Config and command-line).
 * Worflow for automatic deployement.
 * Modified to be undetectable as bot.
 * If it faces to an unexpected error then try the account from first.
