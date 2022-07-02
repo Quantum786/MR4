@@ -19,7 +19,7 @@ An automated solution for earning daily Microsoft Rewards points using Python an
 		*  `--headless ` You can use this argument to run the script in headless mode.
 		*  `--session ` Use this argument to create session for each account.
 		*  `-everyday TIME` This argument takes time in 24h format (HH:MM) to run it everyday at the given time by leaving the program open.
-	* If you run the script normally the session and headless arguments are disabled, instead it asks you for input.
+	* If you run the script normally it asks you for input instead.
 
 ### Using Github Actions
 * Fork the repo.
