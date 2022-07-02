@@ -1077,6 +1077,30 @@ def Menu():
     ╚═╝     ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝""")
     prPurple("by @Charlesbel | upgraded by @MehdiRtal and @Farshadz1997 | version 2.1\n")
 
+def LoadAccounts():
+    global ACCOUNTS, filename
+    if ARGS.accounts:
+        ACCOUNTS = []
+        for arg in ARGS.accounts:
+            ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
+    else:
+        try:
+            account_path = os.path.dirname(os.path.abspath(__file__)) + '/accounts.json'
+            filename, ext = os.path.splitext(os.path.basename(account_path))
+            ACCOUNTS = json.load(open(account_path, "r"))
+        except FileNotFoundError:
+            with open(account_path, 'w') as f:
+                f.write(json.dumps([{
+                    "username": "Your Email",
+                    "password": "Your Password"
+                }], indent=4))
+            prPurple(f"""
+        [ACCOUNT] Accounts credential file "{filename}{ext}" created.
+        [ACCOUNT] Edit with your credentials and save, then press any key to continue...
+            """)
+            input()
+            ACCOUNTS = json.load(open(account_path, "r"))
+
 def App():
     '''
     fuction that runs other functions to farm.
@@ -1171,7 +1195,7 @@ def App():
         App()
 
 def main():
-    global LANG, GEO, TZ, ARGS, ACCOUNTS, filename
+    global LANG, GEO, TZ, ARGS
     # ignore DeprecationWarning: Using Selenium 4 instead of Selenium 3
     warnings.filterwarnings("ignore", category=DeprecationWarning)
     # show colors in terminal
@@ -1181,27 +1205,7 @@ def main():
     ARGS = argument_parser()
     LANG, GEO, TZ = getCCodeLangAndOffset()
     # load accounts
-    if ARGS.accounts:
-        ACCOUNTS = []
-        for arg in ARGS.accounts:
-            ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
-    else:
-        try:
-            account_path = os.path.dirname(os.path.abspath(__file__)) + '/accounts.json'
-            filename, ext = os.path.splitext(os.path.basename(account_path))
-            ACCOUNTS = json.load(open(account_path, "r"))
-        except FileNotFoundError:
-            with open(account_path, 'w') as f:
-                f.write(json.dumps([{
-                    "username": "Your Email",
-                    "password": "Your Password"
-                }], indent=4))
-            prPurple(f"""
-        [ACCOUNT] Accounts credential file "{filename}{ext}" created.
-        [ACCOUNT] Edit with your credentials and save, then press any key to continue...
-            """)
-            input()
-            ACCOUNTS = json.load(open(account_path, "r"))
+    LoadAccounts()
     # set time to launch the program if everyday is not set
     if not ARGS.everyday:
         if sys.stdout.isatty():
