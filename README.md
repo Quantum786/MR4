@@ -5,8 +5,6 @@
 An automated solution for earning daily Microsoft Rewards points using Python and Selenium.
 
 ## Installation
-
-### Using config file
 * Clone the repo.
 * Install requirements with the following command :
  ```
