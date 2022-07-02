@@ -979,6 +979,10 @@ def argument_parser():
                         help='[Optional] Creates session for each account and use it.',
                         action='store_true',
                         required=False)
+    parser.add_argument('--accounts',
+                        help='[Optional] Add accounts.',
+                        nargs="*",
+                        required=False)
     args = parser.parse_args()
     if args.everyday:
         if isinstance(validate_time(args.everyday), str):
@@ -1063,7 +1067,7 @@ def prBlue(prt):
 def prPurple(prt):
     print(f"\033[95m{prt}\033[00m")
 
-def Logo():
+def Menu():
     prRed("""
     ███╗   ███╗███████╗    ███████╗ █████╗ ██████╗ ███╗   ███╗███████╗██████╗ 
     ████╗ ████║██╔════╝    ██╔════╝██╔══██╗██╔══██╗████╗ ████║██╔════╝██╔══██╗
@@ -1073,22 +1077,27 @@ def Logo():
     ╚═╝     ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝""")
     prPurple("by @Charlesbel | upgraded by @MehdiRtal and @Farshadz1997 | version 2.1\n")
 
-try:
-    account_path = os.path.dirname(os.path.abspath(__file__)) + '/accounts.json'
-    filename, ext = os.path.splitext(os.path.basename(account_path))
-    ACCOUNTS = json.load(open(account_path, "r"))
-except FileNotFoundError:
-    with open(account_path, 'w') as f:
-        f.write(json.dumps([{
-            "username": "Your Email",
-            "password": "Your Password"
-        }], indent=4))
-    prPurple(f"""
-[ACCOUNT] Accounts credential file "{filename}{ext}" created.
-[ACCOUNT] Edit with your credentials and save, then press any key to continue...
-    """)
-    input()
-    ACCOUNTS = json.load(open(account_path, "r"))
+if ARGS.accounts:
+    ACCOUNTS = []
+    for arg in ARGS.accounts:
+        ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
+else:
+    try:
+        account_path = os.path.dirname(os.path.abspath(__file__)) + '/accounts.json'
+        filename, ext = os.path.splitext(os.path.basename(account_path))
+        ACCOUNTS = json.load(open(account_path, "r"))
+    except FileNotFoundError:
+        with open(account_path, 'w') as f:
+            f.write(json.dumps([{
+                "username": "Your Email",
+                "password": "Your Password"
+            }], indent=4))
+        prPurple(f"""
+    [ACCOUNT] Accounts credential file "{filename}{ext}" created.
+    [ACCOUNT] Edit with your credentials and save, then press any key to continue...
+        """)
+        input()
+        ACCOUNTS = json.load(open(account_path, "r"))
 
 def App():
     '''
@@ -1190,7 +1199,7 @@ def main():
     # show colors in terminal
     if os.name == 'nt':
         os.system('color')
-    Logo()
+    Menu()
     # Get the arguments from the command line
     ARGS = argument_parser()
     LANG, GEO, TZ = getCCodeLangAndOffset()
@@ -1220,7 +1229,7 @@ def main():
     delta = end - start
     hour, remain = divmod(delta, 3600)
     min, sec = divmod(remain, 60)
-    print(f"The farmer takes : {hour:02.0f}:{min:02.0f}:{sec:02.0f}")
+    print(f"The script took : {hour:02.0f}:{min:02.0f}:{sec:02.0f}")
     if sys.stdout.isatty():
         input('Press any key to close the program...')
           
