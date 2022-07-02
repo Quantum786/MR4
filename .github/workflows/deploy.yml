@@ -23,7 +23,7 @@ jobs:
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ secrets.CACHE_VERSION }}-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: ${{ runner.os }}-pip-
+          restore-keys: ${{ runner.os }}-pip-${{ secrets.CACHE_VERSION }}
       
       - name: Install Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
