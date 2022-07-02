@@ -1188,7 +1188,8 @@ def main():
     # ignore DeprecationWarning: Using Selenium 4 instead of Selenium 3
     warnings.filterwarnings("ignore", category=DeprecationWarning)
     # show colors in terminal
-    os.system('color')
+    if os.name == 'nt':
+        os.system('color')
     Logo()
     # Get the arguments from the command line
     ARGS = argument_parser()
