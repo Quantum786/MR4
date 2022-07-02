@@ -15,7 +15,7 @@ An automated solution for earning daily Microsoft Rewards points using Python an
 * Make sure you have Chrome installed.
 * Due to limits of Ipapi sometimes it returns error and it causes bot stops. So you can define default language and location to prevent it.
 * Run the script
-	* Use optinal arguments
+	* Use optinal arguments:
 
 ### Using Github Actions
 * Fork the repo.
