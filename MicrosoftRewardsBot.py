@@ -1171,7 +1171,7 @@ def App():
         App()
 
 def main():
-    global LANG, GEO, TZ, ARGS
+    global LANG, GEO, TZ, ARGS, ACCOUNTS, filename
     # ignore DeprecationWarning: Using Selenium 4 instead of Selenium 3
     warnings.filterwarnings("ignore", category=DeprecationWarning)
     # show colors in terminal
