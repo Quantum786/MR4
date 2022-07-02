@@ -1196,8 +1196,7 @@ def main():
     LANG, GEO, TZ = getCCodeLangAndOffset()
     # set time to launch the program if everyday is not set
     if not ARGS.everyday:
-        answer = input('''If you want to run the program at a specific time, type your desired time in 24h format (HH:MM) else press Enter
-(\033[93manything other than time causes the script to start immediately\033[00m): ''')
+        answer = None # input('''If you want to run the program at a specific time, type your desired time in 24h format (HH:MM) else press Enter (\033[93manything other than time causes the script to start immediately\033[00m): ''')
         run_on = validate_time(answer)
     else:
         run_on = ARGS.everyday
