@@ -29,11 +29,5 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: pip install -r requirements.txt
       
-      - name: Cache Logs
-        uses: actions/cache@v3
-        with:
-          path: Logs_accounts.txt
-          key: ${{ runner.os }}-logs
-      
       - name: Run Script
-        run: python MicrosoftRewardsBot.py --headless
+        run: python MicrosoftRewardsBot.py --accounts ${{ secrets.ACCOUNTS }} --headless
