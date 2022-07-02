@@ -37,7 +37,7 @@ If you want to add more than one account, the syntax is the following (mobile_us
   "mobile_user_agent": "Your Preferred Mobile User Agent"
 }
 ```
-* Got to `Actions` tab and run `Deploy` workflow.
+* Go to `Actions` tab and run `Deploy` workflow.
  
 ## Features
 * Bing searches (Desktop, Mobile and Edge) with User-Agents
