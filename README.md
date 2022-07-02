@@ -46,6 +46,7 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * Complete automatically the others promotions
 * Headless Mode
 * Multi-Account Management
+* Worflow for automatic deployement
 * Modified to be undetectable as bot
 * If it faces to an unexpected error then try the account from first
 * Save progress of bot in a log file and use it to pass completed account on the next start at the same day
