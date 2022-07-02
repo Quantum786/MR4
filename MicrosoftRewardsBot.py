@@ -1177,6 +1177,9 @@ def main():
     # show colors in terminal
     if os.name == 'nt':
         os.system('color')
+    # Get the arguments from the command line
+    ARGS = argument_parser()
+    LANG, GEO, TZ = getCCodeLangAndOffset()
     # load accounts
     if ARGS.accounts:
         ACCOUNTS = []
@@ -1199,9 +1202,6 @@ def main():
             """)
             input()
             ACCOUNTS = json.load(open(account_path, "r"))
-    # Get the arguments from the command line
-    ARGS = argument_parser()
-    LANG, GEO, TZ = getCCodeLangAndOffset()
     # set time to launch the program if everyday is not set
     if not ARGS.everyday:
         if sys.stdout.isatty():
