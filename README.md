@@ -11,16 +11,6 @@ An automated solution for earning daily Microsoft Rewards points using Python an
  pip install -r requirements.txt
  ```
 * Make sure you have Chrome installed.
-* Due to limits of Ipapi sometimes it returns error and it causes bot stops. So you can define default language and location to prevent it.
-* Run the script.
-	* Optional arguments:
-		*  `--headless ` You can use this argument to run the script in headless mode.
-		*  `--session ` Use this argument to create session for each account.
-		*  `-everyday TIME` This argument takes time in 24h format (HH:MM) to run it everyday at the given time by leaving the program open.
-	* If you run the script normally it asks you for input instead.
-
-### Using Github Actions
-* Fork the repo.
 * Edit the accounts.json.sample with your accounts credentials and rename it by removing .sample at the end
 If you want to add more than one account, the syntax is the following (mobile_user_agent is optional):
 ```json
@@ -35,6 +25,16 @@ If you want to add more than one account, the syntax is the following (mobile_us
   "mobile_user_agent": "Your Preferred Mobile User Agent"
 }
 ```
+* Due to limits of Ipapi sometimes it returns error and it causes bot stops. So you can define default language and location to prevent it.
+* Run the script.
+	* Optional arguments:
+		*  `--headless ` You can use this argument to run the script in headless mode.
+		*  `--session ` Use this argument to create session for each account.
+		*  `-everyday TIME` This argument takes time in 24h format (HH:MM) to run it everyday at the given time by leaving the program open.
+	* If you run the script normally it asks you for input instead.
+
+### Using Github Actions
+* Fork the repo.
 * Go to `Actions` tab and run `Deploy` workflow.
  
 ## Features
