@@ -35,7 +35,7 @@ If you want to add more than one account, the syntax is the following (mobile_us
 
 ### Using Github Actions
 * Fork the repo.
-* Go to `Settings`>`Secrets`>`Actions` and add `New repository secret` named `ACCOUNTS` where the value will `Your Email:Your Password`.
+* Go to `Settings`>`Secrets`>`Actions` and add `New repository secret` named `ACCOUNTS` where the value will be `Your Email:Your Password`.
 * Go to `Actions`>`Deploy` and run the workflow.
  
 ## Features
