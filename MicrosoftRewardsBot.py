@@ -1246,7 +1246,7 @@ def main():
             answer = input('''If you want to run the program at a specific time, type your desired time in 24h format (HH:MM) else press Enter (\033[93manything other than time causes the script to start immediately\033[00m): ''')
         else:
             answer = ""
-        run_on = validate_time(answer)
+        run_on = validateTime(answer)
     else:
         run_on = ARGS.everyday
     if run_on is not None:
