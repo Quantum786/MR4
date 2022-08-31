@@ -1004,10 +1004,6 @@ def argumentParser():
                         help='[Optional] Display errors when app fails.',
                         action='store_true',
                         required=False)
-    parser.add_argument('--error',
-                        help='[Optional] Display errors when app fails.',
-                        action='store_true',
-                        required=False)
     parser.add_argument('--fast',
                         help="[Optional] Reduce delays where ever it's possible to make script faster.",
                         action='store_true',
