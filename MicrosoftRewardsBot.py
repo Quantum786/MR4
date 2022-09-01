@@ -65,7 +65,7 @@ def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT) -> WebDriver:
     if platform.system() == 'Linux':
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-    chrome_browser_obj = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    chrome_browser_obj = webdriver.Chrome(service=ChromeDriverManager().install(), options=options)
     return chrome_browser_obj
 
 # Define login function
