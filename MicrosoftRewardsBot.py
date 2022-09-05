@@ -66,6 +66,8 @@ def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT) -> WebDriver:
     if platform.system() == 'Linux':
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
+    if ARGS.proxies:
+        options.add_argument(f"--proxy-server={random.choice(ARGS.proxies)}")
     chrome_browser_obj = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return chrome_browser_obj
 
@@ -1008,6 +1010,10 @@ def argumentParser():
     parser.add_argument('--fast',
                         help="[Optional] Reduce delays where ever it's possible to make script faster.",
                         action='store_true',
+                        required=False)
+    parser.add_argument('--proxies',
+                        help='[Optional] Add proxies.',
+                        nargs="*",
                         required=False)
     args = parser.parse_args()
     if args.everyday:
