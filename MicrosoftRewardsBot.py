@@ -1245,8 +1245,7 @@ def farmer():
 def main():
     global LANG, GEO, TZ, ARGS
     # show colors in terminal
-    if os.name == 'nt':
-        os.system('color')
+    os.system('color')
     # Get the arguments from the command line
     ARGS = argumentParser()
     LANG, GEO, TZ = getCCodeLangAndOffset()
