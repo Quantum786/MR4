@@ -1002,10 +1002,6 @@ def argumentParser():
                         help='[Optional] Creates session for each account and use it.',
                         action='store_true',
                         required=False)
-    parser.add_argument('--accounts',
-                        help='[Optional] Add accounts.',
-                        nargs="*",
-                        required=False)
     parser.add_argument('--error',
                         help='[Optional] Display errors when app fails.',
                         action='store_true',
@@ -1013,6 +1009,10 @@ def argumentParser():
     parser.add_argument('--fast',
                         help="[Optional] Reduce delays where ever it's possible to make script faster.",
                         action='store_true',
+                        required=False)
+    parser.add_argument('--accounts',
+                        help='[Optional] Add accounts.',
+                        nargs="*",
                         required=False)
     parser.add_argument('--proxies',
                         help='[Optional] Add proxies.',
