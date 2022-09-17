@@ -1123,8 +1123,8 @@ def loadAccounts():
     global ACCOUNTS
     if ARGS.accounts:
         ACCOUNTS = []
-        for arg in ARGS.accounts:
-            ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
+        for account in ARGS.accounts:
+            ACCOUNTS.append({"username": account.split(":")[0], "password": account.split(":")[1]})
     else:
         try:
             ACCOUNTS = json.load(open("accounts.json", "r"))
