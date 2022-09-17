@@ -66,8 +66,13 @@ def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT, proxy: str = N
     if platform.system() == 'Linux':
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
+<<<<<<< HEAD
+    if proxy:
+        options.add_argument(f"--proxy-server={proxy}")
+=======
     if ARGS.proxies:
         options.add_argument(f"--proxy-server={proxy}")
+>>>>>>> 543eb17cd1951724cf65a06b7b7a8164d72cfac9
     chrome_browser_obj = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return chrome_browser_obj
 
