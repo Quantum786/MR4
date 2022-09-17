@@ -38,7 +38,7 @@ LOGS = {} # Dictionary of accounts to write in 'logs_accounts.txt'.
 FAST = False # When this variable set True then all possible delays reduced.
 
 # Define browser setup function
-def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT) -> WebDriver:
+def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT, proxy: str = None) -> WebDriver:
     # Create Chrome browser
     from selenium.webdriver.chrome.options import Options
     options = Options()
@@ -67,7 +67,7 @@ def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT) -> WebDriver:
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
     if ARGS.proxies:
-        options.add_argument(f"--proxy-server={random.choice(ARGS.proxies)}")
+        options.add_argument(f"--proxy-server={proxy}")
     chrome_browser_obj = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return chrome_browser_obj
 
