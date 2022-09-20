@@ -24,8 +24,8 @@ from selenium.common.exceptions import (NoSuchElementException, TimeoutException
                                         UnexpectedAlertPresentException, NoAlertPresentException, SessionNotCreatedException)
 
 # Define user-agents
-PC_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36 Edg/104.0.1293.47'
-MOBILE_USER_AGENT = 'Mozilla/5.0 (Linux; Android 12; SM-N9750) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.69 Mobile Safari/537.36'
+PC_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.33'
+MOBILE_USER_AGENT = 'Mozilla/5.0 (Linux; Android 12; SM-N9750) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Mobile Safari/537.36'
 
 
 # Global variables
@@ -38,7 +38,7 @@ LOGS = {} # Dictionary of accounts to write in 'logs_accounts.txt'.
 FAST = False # When this variable set True then all possible delays reduced.
 
 # Define browser setup function
-def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT) -> WebDriver:
+def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT, proxy: str = None) -> WebDriver:
     # Create Chrome browser
     from selenium.webdriver.chrome.options import Options
     options = Options()
@@ -66,8 +66,8 @@ def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT) -> WebDriver:
     if platform.system() == 'Linux':
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-    if ARGS.proxies:
-        options.add_argument(f"--proxy-server={random.choice(ARGS.proxies)}")
+    if proxy:
+        options.add_argument(f"--proxy-server={proxy}")
     chrome_browser_obj = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return chrome_browser_obj
 
@@ -929,6 +929,9 @@ def completeMorePromotions(browser: WebDriver):
                 else:
                     if promotion['pointProgressMax'] == 100 or promotion['pointProgressMax'] == 200:
                         completeMorePromotionSearch(browser, i)
+            if promotion['complete'] == False and promotion['pointProgressMax'] == 100 and promotion['promotionType'] == "" \
+                and promotion['destinationUrl'] == "https://rewards.microsoft.com":
+                completeMorePromotionSearch(browser, i)
         except:
             resetTabs(browser)
 
@@ -999,10 +1002,6 @@ def argumentParser():
                         help='[Optional] Creates session for each account and use it.',
                         action='store_true',
                         required=False)
-    parser.add_argument('--accounts',
-                        help='[Optional] Add accounts.',
-                        nargs="*",
-                        required=False)
     parser.add_argument('--error',
                         help='[Optional] Display errors when app fails.',
                         action='store_true',
@@ -1010,6 +1009,10 @@ def argumentParser():
     parser.add_argument('--fast',
                         help="[Optional] Reduce delays where ever it's possible to make script faster.",
                         action='store_true',
+                        required=False)
+    parser.add_argument('--accounts',
+                        help='[Optional] Add accounts.',
+                        nargs="*",
                         required=False)
     parser.add_argument('--proxies',
                         help='[Optional] Add proxies.',
@@ -1120,8 +1123,8 @@ def loadAccounts():
     global ACCOUNTS
     if ARGS.accounts:
         ACCOUNTS = []
-        for arg in ARGS.accounts:
-            ACCOUNTS.append({"username": arg.split(":")[0], "password": arg.split(":")[1]})
+        for account in ARGS.accounts:
+            ACCOUNTS.append({"username": account.split(":")[0], "password": account.split(":")[1]})
     else:
         try:
             ACCOUNTS = json.load(open("accounts.json", "r"))
@@ -1236,12 +1239,13 @@ def farmer():
         browser.quit()
         checkInternetConnection()
         farmer()
+    else:
+        FINISHED_ACCOUNTS.clear()
 
 def main():
     global LANG, GEO, TZ, ARGS
     # show colors in terminal
-    if os.name == 'nt':
-        os.system('color')
+    os.system('color')
     # Get the arguments from the command line
     ARGS = argumentParser()
     LANG, GEO, TZ = getCCodeLangAndOffset()
