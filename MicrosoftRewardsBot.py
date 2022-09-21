@@ -1018,6 +1018,10 @@ def argumentParser():
                         help='[Optional] Add proxies.',
                         nargs="*",
                         required=False)
+    parser.add_argument('--privacy',
+                        help='[Optional] Enable privacy mode.',
+                        action='store_true',
+                        required=False)
     args = parser.parse_args()
     if args.everyday:
         if isinstance(validateTime(args.everyday), str):
@@ -1154,7 +1158,8 @@ def farmer():
             if LOGS[CURRENT_ACCOUNT]["Last check"] != str(date.today()):
                 LOGS[CURRENT_ACCOUNT]["Last check"] = str(date.today())
                 updateLogs()
-            prYellow('********************' + CURRENT_ACCOUNT + '********************')
+            if not ARGS.privacy:
+                prYellow('********************' + CURRENT_ACCOUNT + '********************')
             if not LOGS[CURRENT_ACCOUNT]['PC searches']:
                 browser = browserSetup(False, PC_USER_AGENT)
                 print('[LOGIN]', 'Logging-in...')
