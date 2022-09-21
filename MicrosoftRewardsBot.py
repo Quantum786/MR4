@@ -1158,7 +1158,7 @@ def farmer():
             if LOGS[CURRENT_ACCOUNT]["Last check"] != str(date.today()):
                 LOGS[CURRENT_ACCOUNT]["Last check"] = str(date.today())
                 updateLogs()
-            if not ARGS.privacy
+            if not ARGS.privacy:
                 prYellow('********************' + CURRENT_ACCOUNT + '********************')
             if not LOGS[CURRENT_ACCOUNT]['PC searches']:
                 browser = browserSetup(False, PC_USER_AGENT)
