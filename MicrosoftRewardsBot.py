@@ -1031,7 +1031,7 @@ def argumentParser():
     if args.fast:
         global FAST
         FAST = True
-    if len(sys.argv) > 1 and not ARGS.privacy:
+    if len(sys.argv) > 1 and not args.privacy:
         for arg in vars(args):
             prBlue(f"[INFO] {arg} : {getattr(args, arg)}")
     return args
