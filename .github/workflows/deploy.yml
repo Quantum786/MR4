@@ -1,9 +1,11 @@
 name: Deploy
 
-on:
+on:  
+  push:
+  pull_request:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+  - cron: '5 4 * * *'  # every day at 5:04
 
 jobs:
   deploy:
@@ -23,4 +25,4 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run Script
-        run: python MicrosoftRewardsBot.py --accounts ${{ secrets.ACCOUNTS }} --headless --fast
+        run: python MicrosoftRewardsBot.py --accounts ${{ secrets.ACCOUNTS }} --headless --fast --privacy
