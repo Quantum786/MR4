@@ -1161,7 +1161,7 @@ def farmer():
             if not ARGS.privacy:
                 prYellow('********************' + CURRENT_ACCOUNT + '********************')
             if not LOGS[CURRENT_ACCOUNT]['PC searches']:
-                browser = browserSetup(False, PC_USER_AGENT)
+                browser = browserSetup(False, PC_USER_AGENT, random.choice(ARGS.proxies) if ARGS.proxies else None)
                 print('[LOGIN]', 'Logging-in...')
                 login(browser, account['username'], account['password'])
                 prGreen('[LOGIN] Logged-in successfully !')
@@ -1198,7 +1198,7 @@ def farmer():
                 browser.quit()
 
             if MOBILE:
-                browser = browserSetup(True, account.get('mobile_user_agent', MOBILE_USER_AGENT))
+                browser = browserSetup(True, account.get('mobile_user_agent', MOBILE_USER_AGENT), random.choice(ARGS.proxies) if ARGS.proxies else None)
                 print('[LOGIN]', 'Logging-in...')
                 login(browser, account['username'], account['password'], True)
                 prGreen('[LOGIN] Logged-in successfully !')
