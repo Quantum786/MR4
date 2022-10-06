@@ -37,11 +37,6 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * Fork the repo.
 * Go to `Settings`>`Secrets`>`Actions` and add `New repository secret` named `ACCOUNTS` where the value will be `Your Email:Your Password`.
 * Go to `Actions`>`Deploy` and run the workflow.
-
-## Precautions against account bans
-* Dont use outlook-mail
-* Dont run the script with more than six accouns per ip
-* For Github Workflow: Split it on multiple repositorys/forks
  
 ## Features
 * Bing searches (Desktop, Mobile and Edge) with User-Agents.
@@ -61,6 +56,11 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * You can assign custom user-agent for mobile like above example.
 * Set clock to start it at specific time.
 * For Bing search it uses random word at first try and if api failed then it uses google trends.
+
+## Warnings
+* Dont use outlook-mail
+* Dont run the script with more than six accouns per ip
+* For Github Workflow: Split it on multiple repositorys/forks
 
 ## Credits
 * [@charlesbel](https://github.com/charlesbel) The original author of the repo.
