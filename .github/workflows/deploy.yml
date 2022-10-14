@@ -11,14 +11,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.1.0
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v4.3.0
         with:
           python-version: '3.x'
           cache: 'pip'
       - name: Wait for Test
-        uses: fountainhead/action-wait-for-check@v1.0.0
+        uses: fountainhead/action-wait-for-check@v1.1.0
         with:
           checkName: test
           token: ${{ github.token }}
