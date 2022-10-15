@@ -13,8 +13,8 @@ import ipapi
 import requests
 from func_timeout import FunctionTimedOut, func_set_timeout
 from random_word import RandomWords
-from webdriver_manager.chrome import ChromeDriverManager
 
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.common.exceptions import (ElementNotInteractableException,
                                         NoAlertPresentException,
@@ -23,6 +23,7 @@ from selenium.common.exceptions import (ElementNotInteractableException,
                                         TimeoutException,
                                         UnexpectedAlertPresentException)
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
