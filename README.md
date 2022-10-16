@@ -28,9 +28,14 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * Due to limits of Ipapi sometimes it returns error and it causes bot stops. So you can define default language and location to prevent it.
 * Run the script.
 	* Optional arguments:
-		*  `--headless ` You can use this argument to run the script in headless mode.
-		*  `--session ` Use this argument to create session for each account.
-		*  `--everyday TIME` This argument takes time in 24h format (HH:MM) to run it everyday at the given time by leaving the program open.
+		* `--headless ` You can use this argument to run the script in headless mode.
+		* `--session ` Use this argument to create session for each account.
+		* `--everyday TIME` This argument takes time in 24h format (HH:MM) to run it everyday at the given time by leaving the program open.
+		* `--fast` Reduce delays where ever it's possible to make script faster.
+		* `--eror` Display errors when app fails.
+		* `--acconts` Add accounts (email1:password1 email2:password2..).
+		* `--proxies` Add proxies without authentification (proxy1 proxy2..).
+		* `--privacy` Enable privacy mode.
 	* If you run the script normally it asks you for input instead.
 
 ### Using Github Actions
@@ -57,10 +62,10 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * Set clock to start it at specific time.
 * For Bing search it uses random word at first try and if api failed then it uses google trends.
 
-## Warnings
-* Dont use outlook-mail
-* Dont run the script with more than six accouns per ip
-* For Github Workflow: Split it on multiple repositorys/forks
+## Warning
+* Dont use outlook.
+* Dont run the script with more than six accouns per IP.
+* If you are using Github Actions then split accounts on multiple repositories/forks or use proxies.
 
 ## Credits
 * [@charlesbel](https://github.com/charlesbel) The original author of the repo.
