@@ -32,8 +32,8 @@ If you want to add more than one account, the syntax is the following (mobile_us
 		* `--session ` Use this argument to create session for each account.
 		* `--everyday TIME` This argument takes time in 24h format (HH:MM) to run it everyday at the given time by leaving the program open.
 		* `--fast` Reduce delays where ever it's possible to make script faster.
-		* `--eror` Display errors when app fails.
-		* `--acconts` Add accounts (email1:password1 email2:password2..).
+		* `--error` Display errors when app fails.
+		* `--accounts` Add accounts (email1:password1 email2:password2..).
 		* `--proxies` Add proxies without authentification (proxy1 proxy2..).
 		* `--privacy` Enable privacy mode.
 	* If you run the script normally it asks you for input instead.
