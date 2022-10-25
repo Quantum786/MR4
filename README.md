@@ -64,7 +64,7 @@ If you want to add more than one account, the syntax is the following (mobile_us
 
 ## Warning
 * Dont use outlook.
-* Dont run the script with more than six accouns per IP.
+* Dont run the script with more than six accounts per IP.
 * If you are using Github Actions then split accounts on multiple repositories/forks or use proxies.
 
 ## Credits
