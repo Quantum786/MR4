@@ -476,7 +476,10 @@ def bingSearch(browser: WebDriver, word: str, isMobile: bool):
     points = 0
     try:
         if not isMobile:
-            points = int(browser.find_element(By.ID, 'id_rc').get_attribute('innerHTML'))
+            try:
+                points = int(browser.find_element(By.ID, 'id_rc').get_attribute('innerHTML'))
+            except ValueError:
+                points = int(browser.find_element(By.ID, 'id_rc').get_attribute('innerHTML').replace(",", ""))
         else:
             try :
                 browser.find_element(By.ID, 'mHamburger').click()
@@ -702,7 +705,6 @@ def completeDailySet(browser: WebDriver):
     error = False
     todayDate = datetime.today().strftime('%m/%d/%Y')
     todayPack = []
-    streak = d["coachMarks"]["streaks"]["promotion"]["activityProgress"]
     for date, data in d['dailySetPromotions'].items():
         if date == todayDate:
             todayPack = data
@@ -736,12 +738,7 @@ def completeDailySet(browser: WebDriver):
         except:
             error = True
             resetTabs(browser)
-    browser.refresh()
-    time.sleep(5)
-    current_streak = getDashboardData(browser)["coachMarks"]["streaks"]["promotion"]["activityProgress"]
-    if current_streak > streak:
-        prGreen(f"[DAILY SET] Completed the Daily Set successfully ! Streak increased to {current_streak}")
-    elif current_streak == streak and error == False:
+    if not error:
         prGreen("[DAILY SET] Completed the Daily Set successfully !")
     else:
         prYellow("[DAILY SET] Daily Set did not completed successfully ! Streak not increased")
@@ -1207,7 +1204,6 @@ def farmer():
                 prGreen('[POINTS] You have ' + str(POINTS_COUNTER) + ' points on your account !')
                 browser.get('https://rewards.microsoft.com/dashboard')
                 if not LOGS[CURRENT_ACCOUNT]['Daily']:
-                    print('[DAILY SET]', 'Trying to complete the Daily Set...')
                     completeDailySet(browser)
                 if not LOGS[CURRENT_ACCOUNT]['Punch cards']:
                     completePunchCards(browser)
@@ -1277,7 +1273,8 @@ def farmer():
 def main():
     global LANG, GEO, TZ, ARGS
     # show colors in terminal
-    os.system('color')
+    if os.name == 'nt':
+        os.system('color')
     # Get the arguments from the command line
     ARGS = argumentParser()
     LANG, GEO, TZ = getCCodeLangAndOffset()
