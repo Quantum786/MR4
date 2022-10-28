@@ -1143,9 +1143,8 @@ def checkInternetConnection():
                 subprocess.check_output(["ping", "-c", "1", "8.8.8.8"], timeout=5)
             return
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
-            # prRed("[ERROR] No internet connection.")
-            # time.sleep(1)
-	        break
+            prRed("[ERROR] No internet connection.")
+            time.sleep(1)
 
 def prRed(prt):
     print(f"\033[91m{prt}\033[00m")
