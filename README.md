@@ -18,8 +18,8 @@ If you want to add more than one account, the syntax is the following (mobile_us
   "username": "Your Email",
   "password": "Your Password",
   "mobile_user_agent": "Your Preferred Mobile User Agent"
- },
- {
+},
+{
   "username": "Your Email",
   "password": "Your Password",
   "mobile_user_agent": "Your Preferred Mobile User Agent"
