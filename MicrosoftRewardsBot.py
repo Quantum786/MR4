@@ -6,6 +6,7 @@ import subprocess
 import sys
 import time
 import urllib.parse
+from pathlib import Path
 from argparse import ArgumentParser
 from datetime import date, datetime, timedelta
 
@@ -49,9 +50,9 @@ def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT, proxy: str = N
     options = Options()
     if ARGS.session:
         if not isMobile:
-            options.add_argument(rf'--user-data-dir={os.path.join(os.getcwd()+f"/Profiles/{CURRENT_ACCOUNT}", "PC")}')
+            options.add_argument(rf'--user-data-dir={Path(__file__).parent}/Profiles/{CURRENT_ACCOUNT}/PC')
         else:
-            options.add_argument(rf'--user-data-dir={os.path.join(os.getcwd()+f"/Profiles/{CURRENT_ACCOUNT}", "Mobile")}')
+            options.add_argument(rf'--user-data-dir={Path(__file__).parent}/Profiles/{CURRENT_ACCOUNT}/Mobile')
     options.add_argument("user-agent=" + user_agent)
     options.add_argument('lang=' + LANG.split("-")[0])
     options.add_argument('--disable-blink-features=AutomationControlled')
@@ -232,7 +233,11 @@ def checkBingLogin(browser: WebDriver, isMobile: bool = False):
                 try:
                     POINTS_COUNTER = int(browser.find_element(By.ID, 'id_rc').get_attribute('innerHTML'))
                 except ValueError:
-                    time.sleep(5)
+                    if isElementExists(browser, By.ID, 'id_s'):
+                        browser.find_element(By.ID, 'id_s').click()
+                        time.sleep(15)
+                        checkBingLogin(browser, isMobile)
+                    time.sleep(2)
                     POINTS_COUNTER = int(browser.find_element(By.ID, "id_rc").get_attribute("innerHTML").replace(",", ""))
             else:
                 browser.find_element(By.ID, 'mHamburger').click()
@@ -296,13 +301,13 @@ def checkBingLogin(browser: WebDriver, isMobile: bool = False):
         if not isMobile:
             try:
                 POINTS_COUNTER = int(browser.find_element(By.ID, 'id_rc').get_attribute('innerHTML'))
-            except ValueError:
+            except:
+                if isElementExists(browser, By.ID, 'id_s'):
+                    browser.find_element(By.ID, 'id_s').click()
+                    time.sleep(15)
+                    checkBingLogin(browser, isMobile)
                 time.sleep(5)
                 POINTS_COUNTER = int(browser.find_element(By.ID, "id_rc").get_attribute("innerHTML").replace(",", ""))
-            except:
-                browser.find_element(By.ID, 'id_s').click()
-                time.sleep(15 if not FAST else 7)
-                checkBingLogin(browser, isMobile)
         else:
             try:
                 browser.find_element(By.ID, 'mHamburger').click()
