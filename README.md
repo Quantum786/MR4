@@ -14,16 +14,16 @@ An automated solution for earning daily Microsoft Rewards points using Python an
 * Edit the accounts.json.sample with your accounts credentials and rename it by removing .sample at the end
 If you want to add more than one account, the syntax is the following (mobile_user_agent is optional):
 ```json
-{
+[{
   "username": "Your Email",
   "password": "Your Password",
   "mobile_user_agent": "Your Preferred Mobile User Agent"
-},
-{
+ },
+ {
   "username": "Your Email",
   "password": "Your Password",
   "mobile_user_agent": "Your Preferred Mobile User Agent"
-}
+}]
 ```
 * Due to limits of Ipapi sometimes it returns error and it causes bot stops. So you can define default language and location to prevent it.
 * Run the script.
