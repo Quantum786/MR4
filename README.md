@@ -63,7 +63,7 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * For Bing search it uses random word at first try and if api failed then it uses google trends.
 
 ## Warning
-* Dont use outlook.
+* Dont use outlook mail with Microsoft Rewards. They more likely to get banned.
 * Dont run the script with more than six accounts per IP.
 * If you are using Github Actions then split accounts on multiple repositories/forks or use proxies.
 
