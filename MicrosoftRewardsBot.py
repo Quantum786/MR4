@@ -50,19 +50,19 @@ def browserSetup(isMobile: bool, user_agent: str = PC_USER_AGENT, proxy: str = N
     options = Options()
     if ARGS.session:
         if not isMobile:
-            options.add_argument(rf'--user-data-dir={Path(__file__).parent}/Profiles/{CURRENT_ACCOUNT}/PC')
+            options.add_argument(f'--user-data-dir={Path(__file__).parent}/Profiles/{CURRENT_ACCOUNT}/PC')
         else:
-            options.add_argument(rf'--user-data-dir={Path(__file__).parent}/Profiles/{CURRENT_ACCOUNT}/Mobile')
+            options.add_argument(f'--user-data-dir={Path(__file__).parent}/Profiles/{CURRENT_ACCOUNT}/Mobile')
     options.add_argument("user-agent=" + user_agent)
     options.add_argument('lang=' + LANG.split("-")[0])
     options.add_argument('--disable-blink-features=AutomationControlled')
-    prefs = {"profile.default_content_setting_values.geolocation" :2,
+    prefs = {"profile.default_content_setting_values.geolocation": 2,
             "credentials_enable_service": False,
             "profile.password_manager_enabled": False,
             "webrtc.ip_handling_policy": "disable_non_proxied_udp",
             "webrtc.multiple_routes_enabled": False,
             "webrtc.nonproxied_udp_enabled" : False}
-    options.add_experimental_option("prefs",prefs)
+    options.add_experimental_option("prefs", prefs)
     options.add_experimental_option("useAutomationExtension", False)
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     if ARGS.headless:
@@ -233,7 +233,7 @@ def checkBingLogin(browser: WebDriver, isMobile: bool = False):
                 try:
                     POINTS_COUNTER = int(browser.find_element(By.ID, 'id_rc').get_attribute('innerHTML'))
                 except ValueError:
-                    if isElementExists(browser, By.ID, 'id_s'):
+                    if browser.find_element(By.ID, 'id_s').is_displayed():
                         browser.find_element(By.ID, 'id_s').click()
                         time.sleep(15)
                         checkBingLogin(browser, isMobile)
@@ -255,7 +255,10 @@ def checkBingLogin(browser: WebDriver, isMobile: bool = False):
     if isMobile:
         # close bing app banner
         if isElementExists(browser, By.ID, 'bnp_rich_div'):
-            browser.find_element(By.XPATH, '//*[@id="bnp_bop_close_icon"]/img').click()
+            try:
+                browser.find_element(By.XPATH, '//*[@id="bnp_bop_close_icon"]/img').click()
+            except NoSuchElementException:
+                pass
         try:
             time.sleep(1)
             browser.find_element(By.ID, 'mHamburger').click()
@@ -302,7 +305,7 @@ def checkBingLogin(browser: WebDriver, isMobile: bool = False):
             try:
                 POINTS_COUNTER = int(browser.find_element(By.ID, 'id_rc').get_attribute('innerHTML'))
             except:
-                if isElementExists(browser, By.ID, 'id_s'):
+                if browser.find_element(By.ID, 'id_s').is_displayed():
                     browser.find_element(By.ID, 'id_s').click()
                     time.sleep(15)
                     checkBingLogin(browser, isMobile)
@@ -1215,7 +1218,7 @@ def farmer():
                 if not LOGS[CURRENT_ACCOUNT]['More promotions']:
                     completeMorePromotions(browser)
                 remainingSearches, remainingSearchesM = getRemainingSearches(browser)
-                MOBILE = True if remainingSearchesM != 0 else False
+                MOBILE = bool(remainingSearchesM)
                 if remainingSearches != 0:
                     print('[BING]', 'Starting Desktop and Edge Bing searches...')
                     bingSearches(browser, remainingSearches)
