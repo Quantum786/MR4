@@ -1291,16 +1291,12 @@ def main():
     # load accounts
     loadAccounts()
     # set time to launch the program if everyday is set
-    if ARGS.everyday:
-        run_on = ARGS.everyday
-    if run_on is not None:
+    if ARGS.everyday is not None:
         while True:
-            if datetime.now().strftime("%H:%M") == run_on:
+            if datetime.now().strftime("%H:%M") == ARGS.everyday:
                 start = time.time()
                 logs()
                 farmer()
-                if ARGS.everyday is None:
-                    break
             time.sleep(30)
     else:
         start = time.time()
