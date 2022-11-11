@@ -1074,8 +1074,11 @@ def argumentParser():
     if args.fast:
         global FAST
         FAST = True
-    if len(sys.argv) > 1 and not args.privacy:
+    if len(sys.argv) > 1:
         for arg in vars(args):
+            if "accounts" in arg or "proxies" in arg:
+                if args.privacy:
+                    continue
             prBlue(f"[INFO] {arg} : {getattr(args, arg)}")
     return args
 
@@ -1201,8 +1204,7 @@ def farmer():
             if LOGS[CURRENT_ACCOUNT]["Last check"] != str(date.today()):
                 LOGS[CURRENT_ACCOUNT]["Last check"] = str(date.today())
                 updateLogs()
-            if not ARGS.privacy:
-                prYellow('********************' + CURRENT_ACCOUNT + '********************')
+            prYellow('********************' + CURRENT_ACCOUNT + '********************')
             if not LOGS[CURRENT_ACCOUNT]['PC searches']:
                 browser = browserSetup(False, PC_USER_AGENT, random.choice(ARGS.proxies) if ARGS.proxies else None)
                 print('[LOGIN]', 'Logging-in...')
