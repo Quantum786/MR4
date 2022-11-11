@@ -154,7 +154,8 @@ def login(browser: WebDriver, email: str, pwd: str, isMobile: bool = False):
             FINISHED_ACCOUNTS.append(CURRENT_ACCOUNT)       
             updateLogs()
             cleanLogs()
-            input('Press any key to close...')
+            if sys.stdout.isatty():
+                input('Press any key to close...')
             os._exit(0)
         else:
             LOGS[CURRENT_ACCOUNT]['Last check'] = 'Unknown error !'
@@ -214,7 +215,8 @@ def RewardsLogin(browser: WebDriver):
         # Check whether Rewards is available in your region or not
         elif browser.find_element(By.XPATH, '//*[@id="error"]/h1').get_attribute('innerHTML') == 'Microsoft Rewards is not available in this country or region.':
             prRed('[ERROR] Microsoft Rewards is not available in this country or region !')
-            input('[ERROR] Press any key to close...')
+            if sys.stdout.isatty():
+                input('[ERROR] Press any key to close...')
             os._exit()
     except NoSuchElementException:
         pass
@@ -1260,12 +1262,6 @@ def farmer():
         ERROR = True
         browser.quit()
         farmer()
-    except SessionNotCreatedException:
-        prBlue('[Driver] Session not created.')
-        prBlue('[Driver] Please download correct version of webdriver form link below:')
-        prBlue('[Driver] https://chromedriver.chromium.org/downloads')
-        input('Press any key to close...')
-        exit()
     except KeyboardInterrupt:
         ERROR = True
         browser.quit()
