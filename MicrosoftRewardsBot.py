@@ -1278,6 +1278,7 @@ def farmer():
 
 def main():
     global LANG, GEO, TZ, ARGS
+    start = time.time()
     # show colors in terminal
     if os.name == 'nt':
         os.system('color')
@@ -1290,12 +1291,10 @@ def main():
     if ARGS.everyday is not None:
         while True:
             if datetime.now().strftime("%H:%M") == ARGS.everyday:
-                start = time.time()
                 logs()
                 farmer()
             time.sleep(30)
     else:
-        start = time.time()
         logs()
         farmer()
     end = time.time()
