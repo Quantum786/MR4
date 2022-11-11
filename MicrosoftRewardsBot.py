@@ -1288,14 +1288,8 @@ def main():
     LANG, GEO, TZ = getCCodeLangAndOffset()
     # load accounts
     loadAccounts()
-    # set time to launch the program if everyday is not set
-    if not ARGS.everyday:
-        if sys.stdout.isatty():
-            answer = input('''If you want to run the program at a specific time, type your desired time in 24h format (HH:MM) else press Enter (\033[93manything other than time causes the script to start immediately\033[00m): ''')
-        else:
-            answer = ""
-        run_on = validateTime(answer)
-    else:
+    # set time to launch the program if everyday is set
+    if ARGS.everyday:
         run_on = ARGS.everyday
     if run_on is not None:
         while True:
