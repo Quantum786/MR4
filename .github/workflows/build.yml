@@ -7,9 +7,9 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3.1.0
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v4.3.0
       with:
         python-version: '3.x'
         cache: 'pip'
@@ -18,19 +18,19 @@ jobs:
         pip install pyinstaller
         pip install -r requirements.txt
     - name: Wait for Test
-      uses: fountainhead/action-wait-for-check@v1.0.0
+      uses: fountainhead/action-wait-for-check@v1.1.0
       with:
         checkName: test
         token: ${{ github.token }}
     - name: Package with pyinstaller
       run: pyinstaller ${{ github.event.repository.name }}.spec
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.1
       with:
         name: ${{ github.workflow }}
         path: 'dist/'
     - name: Delete old workflow runs
-      uses: Mattraks/delete-workflow-runs@v2
+      uses: Mattraks/delete-workflow-runs@v2.0.3
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
