@@ -67,6 +67,13 @@ If you want to add more than one account, the syntax is the following (mobile_us
 * Dont run the script with more than six accounts per IP.
 * If you are using Github Actions then split accounts on multiple repositories/forks or use proxies.
 
+## Troubleshooting
+### If the script does not work as expected, please check the following things before opening a new issue.
+* Is Chrome installed? This must also be the case for "Console only" execution of the script.
+* Is Python installed? Please install a Python Version 3.10 or higher. Also dont forget to add the new Python version as environment variable too.
+* For Systems without GUI, use --headless parameter to run it.
+* Don't forget to install the dependencies from the "requirements.txt".
+
 ## Credits
 * [@charlesbel](https://github.com/charlesbel) The original author of the repo.
 * [@Farshadz1997](https://github.com/farshadz1997) For adding a bunch of features.
